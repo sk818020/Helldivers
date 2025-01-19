@@ -1,5 +1,6 @@
 import streamlit as st
-from st_aggrid import AgGrid
+#from st_aggrid import AgGrid
+import st_aggrid
 import json
 import requests
 import pandas as pd
@@ -33,8 +34,8 @@ st.title('Helldivers 2 Player Count Analysis')
 
 fig1 = px.bar(df, x='faction', y='players', color = 'name', title = 'Player Count by Faction and Planet')
 fig2 = px.line(df3, x = 'created_at', y = 'player_count', color = 'name',
-               title = 'Player Count by Planet and Time (last 24 hours, Mountain time')
+               title = 'Player Count by Planet and Time (last 24 hours, Mountain time)')
 st.plotly_chart(fig1)
 st.plotly_chart(fig2)
 print('hello')
-AgGrid(df3)
+#st_aggrid.AgGrid(df3)
