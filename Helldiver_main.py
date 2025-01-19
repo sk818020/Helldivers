@@ -32,10 +32,10 @@ df3['created_at'] = df3['created_at'].dt.tz_convert('MST')
 
 st.title('Helldivers 2 Player Count Analysis')
 
-fig1 = px.bar(df, x='faction', y='players', color = 'name', title = 'Player Count by Faction and Planet')
+fig1 = px.bar(df, x='faction', y='players', color = 'name',
+              title = 'Player Count by Faction and Planet')
 fig2 = px.line(df3, x = 'created_at', y = 'player_count', color = 'name',
                title = 'Player Count by Planet and Time (last 24 hours, Mountain time)')
 st.plotly_chart(fig1)
 st.plotly_chart(fig2)
-print('hello')
 #st_aggrid.AgGrid(df3)
