@@ -34,6 +34,11 @@ df3['created_at'] = df3['created_at'].dt.tz_convert('MST')
 
 stamp = dt.datetime.now().strftime('%m/%d/%y - %H:%M')
 st.title('Helldivers 2 Player Count Analysis - {x} MST'.format(x = stamp))
+st.text_area("",
+    "Note: the left graph uses minute by minute data, and the right uses every 5 minute minute data. This can lead to small differences"\
+    " in player count.",
+             height = 68
+)
 fig1 = px.bar(df, x='faction', y='players', color = 'name',
               title = 'Player Count by Faction and Planet')
 fig2 = px.line(df3, x = 'created_at', y = 'player_count', color = 'name',
