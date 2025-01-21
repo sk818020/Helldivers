@@ -1,5 +1,5 @@
 import streamlit as st
-#from st_aggrid import AgGrid
+from st_aggrid import AgGrid
 import st_aggrid
 import json
 import requests
@@ -8,6 +8,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from streamlit_plotly_events import plotly_events
 import plotly.express as px
+import datetime as dt
+
+st.set_page_config(layout="wide")
 
 res = requests.get("https://helldiverstrainingmanual.com/api/v1/war/campaign")
 response = json.loads(res.text)
@@ -27,15 +30,19 @@ map1 = df[['planetIndex', 'name', 'faction']]
 df3 = pd.merge(df3, map1, left_on='planet_index', right_on='planetIndex')
 df3['created_at'] = pd.to_datetime(df3['created_at'])
 df3['created_at'] = df3['created_at'].dt.tz_convert('MST')
-#fig = px.line(df3, x = 'created_at', y = 'player_count', width = 1200, height = 1000, )
-#streamlit.title('Test')
 
-st.title('Helldivers 2 Player Count Analysis')
 
+stamp = dt.datetime.now().strftime('%m/%d/%y - %H:%M')
+st.title('Helldivers 2 Player Count Analysis - {x} MST'.format(x = stamp))
 fig1 = px.bar(df, x='faction', y='players', color = 'name',
               title = 'Player Count by Faction and Planet')
 fig2 = px.line(df3, x = 'created_at', y = 'player_count', color = 'name',
                title = 'Player Count by Planet and Time (last 24 hours, Mountain time)')
-st.plotly_chart(fig1)
-st.plotly_chart(fig2)
-#st_aggrid.AgGrid(df3)
+
+
+col1, col2 = st.columns(2)
+with col1:
+    st.plotly_chart(fig1)
+with col2:
+    st.plotly_chart(fig2)
+st_aggrid.AgGrid(df3)
