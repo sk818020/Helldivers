@@ -39,7 +39,15 @@ fig1 = px.bar(df, x='faction', y='players', color = 'name',
 fig2 = px.line(df3, x = 'created_at', y = 'player_count', color = 'name',
                title = 'Player Count by Planet and Time (last 24 hours, Mountain time)')
 
-
+st.sidebar.header('Choose selection:')
+planet_filter = st.sidebar.selectbox(
+    'Select Planet',
+    options = df3['name'].unique()
+)
+faction_filter = st.sidebar.selectbox(
+    'Select Faction',
+    options = df3['faction'].unique()
+)
 col1, col2 = st.columns(2)
 with col1:
     st.plotly_chart(fig1)
