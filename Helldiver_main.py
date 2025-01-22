@@ -33,7 +33,6 @@ map1 = df[['planetIndex', 'name', 'faction']]
 df3 = pd.merge(df3, map1, left_on='planet_index', right_on='planetIndex')
 df3['created_at'] = pd.to_datetime(df3['created_at'])
 df3['created_at'] = df3['created_at'].dt.tz_convert('MST')
-#st_aggrid.AgGrid(df)
 stamp = dt.datetime.now().strftime('%m/%d/%y - %H:%M')
 st.title('Helldivers 2 Player Count Analysis - {x} MST'.format(x = stamp))
 st.text_area("",
@@ -41,7 +40,10 @@ st.text_area("",
     " in player count.",
              height = 68
 )
+
+st.sidebar.image(r"https://th.bing.com/th/id/OIP.waKn6kIxrziGi7stnV6GGQHaC2?rs=1&pid=ImgDetMain")
 st.sidebar.header('Choose selection:')
+
 planet_filter = st.sidebar.multiselect(
     'Select Planet',
     options = df3['name'].unique()
@@ -57,7 +59,6 @@ fig1 = px.bar(df[df['faction'].isin(faction_filter)], x='faction', y='player_cou
               title = 'Player Count by Faction and Planet')
 fig2 = px.line(df3[df3['faction'].isin(faction_filter)], x = 'created_at', y = 'player_count', color = 'name',
                title = 'Player Count by Planet and Time (last 24 hours, Mountain time)')
-
 
 with col1:
     st.plotly_chart(fig1)
