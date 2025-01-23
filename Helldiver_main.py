@@ -14,8 +14,6 @@ from streamlit_dynamic_filters import DynamicFilters
 
 st.set_page_config(layout="wide")
 
-x = 12
-
 res = requests.get("https://helldiverstrainingmanual.com/api/v1/war/campaign")
 response = json.loads(res.text)
 df = pd.DataFrame(response)
