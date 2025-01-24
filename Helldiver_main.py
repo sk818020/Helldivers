@@ -41,7 +41,7 @@ st.text_area("",
              height = 68
 )
 
-st.sidebar.image(r"https://newsboilerstorage.blob.core.windows.net/news/2584403_0_lg.jpg")
+st.sidebar.image(r"https://image.api.playstation.com/vulcan/ap/rnd/202309/2115/249a75447b653d4118ee62f1a733ad8ee66beaa0e11ea60b.png")
 st.sidebar.header('Choose selection:')
 
 planet_filter = st.sidebar.multiselect(
